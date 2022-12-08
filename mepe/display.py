@@ -26,7 +26,7 @@ def display_metric(metric: "prometheus_client.metrics_core.Metric") -> None:
         name.stylize("bold", 0, prefix)
 
     _type = Text(metric.type)
-    _type.stylize("magenta")
+    _type.stylize("blue")
 
     unit = Text(metric.unit)
     unit.stylize("blue")
