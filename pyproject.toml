@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "metrics-explorer"
+name = "mepe"
 version = "0.1.0"
 description = ""
 authors = ["laixintao <laixintaoo@gmail.com>"]
 readme = "README.md"
-packages = [{include = "metrics_explorer"}]
+packages = [{include = "mepe"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
