@@ -1,10 +1,10 @@
 bump_patch:
-    bumpversion patch
+	bumpversion patch
 
 bump_minor:
-    bumpversion minor
+	bumpversion minor
 
 patch: bump_patch
-    rm -rf dist
-    poetry build
-    poetry publish
+	rm -rf dist
+	poetry build
+	poetry publish
