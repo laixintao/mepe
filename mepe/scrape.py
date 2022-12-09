@@ -22,4 +22,27 @@ def fetch_metrics_url(url) -> List["prometheus_client.metrics_core.Metric"]:
     logger.info(f"Successfully fetch the metrics, {len(metrics_text)=}, parsing...")
 
     metrics = text_string_to_metric_families(metrics_text)
-    return list(metrics)
+    # merge metrics with the same name, it seems that prometheus_client didn't
+    # merge them correctly
+
+    merge_dict = {}
+    for m in metrics:
+        merge_dict.setdefault(m.name, []).append(m)
+
+    unique_metrics = list()
+    for values in merge_dict.values():
+        samples = []
+        for m in values:
+            samples.extend(m.samples)
+
+        selected_metric = _select_metric(values)
+        selected_metric.samples = samples
+        unique_metrics.append(selected_metric)
+    return unique_metrics
+
+
+def _select_metric(values):
+    for v in values:
+        if v.type != "unknown":
+            return v
+    return values[0]

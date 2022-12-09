@@ -36,9 +36,10 @@ def display_metric(metric: "prometheus_client.metrics_core.Metric") -> None:
 
     console.print(name, _type, unit, total_samples)
 
-    doc = Text(metric.documentation)
-    doc.stylize("green")
-    console.print("  ", doc)
+    if metric.documentation:
+        doc = Text(metric.documentation)
+        doc.stylize("green")
+        console.print("  ", doc)
 
     labels = set()
     for sample in metric.samples:
