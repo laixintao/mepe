@@ -10,6 +10,8 @@ logger = logging.getLogger(__name__)
 
 
 def display(metrics: List["prometheus_client.metrics_core.Metric"]) -> None:
+    metrics = sorted(metrics, key=lambda m: m.name)
+
     for metric in metrics:
         display_metric(metric)
 
