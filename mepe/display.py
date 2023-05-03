@@ -17,7 +17,11 @@ def display(metrics: List["prometheus_client.metrics_core.Metric"]) -> None:
 
 
 def display_metric(metric: "prometheus_client.metrics_core.Metric") -> None:
-    name = Text(metric.name)
+
+    metric_name = metric.samples[0].name
+
+    name = Text(metric_name)
+
     # bold the common prefix which indicates the metrics group
 
     name.stylize("yellow")
